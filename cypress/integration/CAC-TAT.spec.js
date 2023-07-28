@@ -163,4 +163,17 @@ describe('Central de Atendimento ao Cliente TAT', () => {
             expect($input[0].files[0].name).to.equal('example.json')
         })
     })    
+    it('verifica que a política de privacidade abre em outra aba sem a necessidade de um clique', () => {
+        cy.get('#privacy a').should('have.attr', 'target','_blank')
+    })
+
+    it('acessa a página da política de privacidade removendo o target e então clicando no link', () => {
+        cy.get('#privacy a')
+          .invoke('removeAttr', 'target') 
+          //dessa forma a página da política de privacidade que abriria em outra página, será exibida na mesma tela.
+          .click()
+          cy.contains('Talking About Testing').should('be.visible')
+    })
+    
 })
+
